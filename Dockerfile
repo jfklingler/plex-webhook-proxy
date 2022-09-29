@@ -1,11 +1,11 @@
-FROM node:12.22.12
+FROM node:16.17-alpine3.16
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
-RUN npm install --production
+RUN npm install --omit=dev
 
 COPY . .
 
