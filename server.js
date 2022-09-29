@@ -89,3 +89,9 @@ app.listen(env.LISTEN_PORT, () => {
   logger.info(`Proxying requests to ${postUrl}`);
   logger.info('Ready to receive requests')
 });
+
+// Trap CTRL-C - node doesn't exit in docker...
+process.on('SIGINT', function (code) {
+  logger.info('Stopping server');
+  process.exit();
+});
