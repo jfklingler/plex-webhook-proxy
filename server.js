@@ -61,9 +61,10 @@ app.post(env.LISTEN_PATH, upload.single('thumb'), (req, res, _) => {
   }
   
   if (payload) {
+    logger.debug(`Forwarding request`, { params: req.query, payload: payload });
     axios.post(postUrl, payload, { params: req.query })
       .then((forwardRes) => {
-        logger.debug(`HTTP POST ${postUrl}`);//, { res: forwardRes });
+        logger.debug(`HTTP POST ${postUrl} ${forwardRes.status} ${forwardRes.statusText}`, forwardRes.data);
         res.status(forwardRes.status).send(forwardRes.data);
       }).catch((err) => {
         logger.error(err);
@@ -74,7 +75,7 @@ app.post(env.LISTEN_PATH, upload.single('thumb'), (req, res, _) => {
 
 app.post(env.SELF_TEST_PATH, (req, res) => {
   let dataReceived = {headers: req.headers, queryString: req.query, data: req.body}
-
+  logger.debug('[SELF-TEST] Received request', dataReceived);
   res.send({selfTest: 'OK', dataReceived: dataReceived});
 });
 
