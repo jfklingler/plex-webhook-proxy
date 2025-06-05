@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/jfklingler/plex-webhook-proxy",
   "dependencies": {
-    "axios": "0.28.0",
+    "axios": "0.30.0",
     "express": "4.21.2",
     "express-winston": "4.2.0",
     "multer": "2.0.1",
